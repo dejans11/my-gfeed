@@ -1,0 +1,31 @@
+## -*- coding: utf-8 -*-
+
+<%inherit file="base.html" />
+
+<%def name="title()">
+	<title>GmailFeed - Home</title>
+</%def>
+
+<%def name="head_tags()">
+  <!-- add some head tags here -->
+</%def>
+
+Hello ${ nickname }...
+
+<br />
+
+% if confirmation_code:
+<br />
+Your confirmation code to use in your gmail account is [${ confirmation_code }]...
+<br />
+<br />
+% endif
+
+<a href="${ settings_url }">Settings</a>
+<br />
+<a href="${ email_url }">See email</a>
+
+<br />
+<br />
+
+<a href="${ logout_url }">Sign out</a>

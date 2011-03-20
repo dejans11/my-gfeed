@@ -1,0 +1,60 @@
+## -*- coding: utf-8 -*-
+
+<%inherit file="base.html" />
+
+<%def name="title()">
+	<title>GmailFeed - Mail</title>
+</%def>
+
+<%def name="head_tags()">
+  <!-- add some head tags here -->
+</%def>
+
+Hello ${ nickname }...
+
+<br />
+<br />
+--------------------------------------------<br />
+
+% if emails :
+	% for email in emails:
+		Sender : ${ unicode(email.sender) } 
+		<br />
+		Subject :  ${ unicode(email.subject) }
+		<br />
+		Date and time :  ${ email.received }
+		<br />
+		% if email.attachments:
+			Attachments :  ${ str(len(email.attachments)) }
+			<br />
+			<a href="/download_zip/${ email.key() }">Download all attachments as zip file...</a>
+			<br />
+		% endif
+		<a href="/maildetails/${ email.key() }">More...</a>
+		<br />
+		
+		--------------------------------------------<br />
+	% endfor
+	% if not prev_page:
+		Previous Page   
+	% else:
+		<a href="/mail?page=${ prev_page }">Previous Page</a>
+	% endif
+	% if not next_page:   
+		Next Page
+	% else:
+		<a href="/mail?page=${ next_page }">Next Page</a>   
+	% endif
+% else:
+	No new emails...
+% endif
+
+<br />
+
+<a href="${ home_url }">Homepage</a>
+
+<br />
+<br />
+
+<a href="${ logout_url }">Sign out</a>
+

@@ -1,0 +1,16 @@
+application: my-gfeed
+version: 1
+runtime: python
+api_version: 1
+
+inbound_services:
+- mail
+
+handlers:
+- url: /_ah/mail/.+ 
+  script: handle_email_all.py 
+
+- url: /.*
+  script: index.py
+  
+  

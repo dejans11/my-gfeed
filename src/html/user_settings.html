@@ -1,0 +1,41 @@
+## -*- coding: utf-8 -*-
+
+<%inherit file="base.html" />
+
+<%def name="title()">
+	<title>GmailFeed - Mail</title>
+</%def>
+
+<%def name="head_tags()">
+  <!-- add some head tags here -->
+</%def>
+
+Hello ${ nickname }...
+
+<br />
+<br />
+
+
+% if msg_updated :
+	${ msg_updated } 
+	<br />
+	<br />
+% endif
+
+<form action="/settings"  id="form_settings" name="form_settings" method="get">
+
+	<input type="text" id="paging_pager_count" name="paging_pager_count" value="${ user_settings.paging_pager_count }" />
+	<br />
+	<input type="submit" id="btn_submit" name="btn_submit" value="Save" />
+
+</form>
+
+<br />
+
+<a href="${ home_url }">Homepage</a>
+
+<br />
+<br />
+
+<a href="${ logout_url }">Sign out</a>
+

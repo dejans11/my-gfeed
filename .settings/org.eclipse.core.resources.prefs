@@ -1,0 +1,14 @@
+#Mon Mar 07 02:54:52 EET 2011
+eclipse.preferences.version=1
+encoding//src/data/model.py=utf-8
+encoding//src/download.py=utf-8
+encoding//src/download_zip.py=utf-8
+encoding//src/handle_email_all.py=utf-8
+encoding//src/home.py=utf-8
+encoding//src/index.py=utf-8
+encoding//src/mail.py=utf-8
+encoding//src/mail_details.py=utf-8
+encoding//src/mako/_ast_util.py=utf-8
+encoding//src/settings.py=utf-8
+encoding//src/user_settings.py=utf-8
+encoding//src/utilities/util.py=utf-8
