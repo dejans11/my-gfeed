@@ -29,9 +29,6 @@ class UserSettingsPage(TemplateHandler):
         q = RegisteredUserSettings.all()
         q.filter('user', user)
         user_settings = q.fetch(1)
-        #query = db.GqlQuery('select * from Email where user = :user', user=user)
-        #query.bind(user=user)
-        #emails = db.Query(Email).filter('user', user)
 
         if user_settings == None or len(user_settings) == 0:
             # settings not yet created - for old users

@@ -11,10 +11,6 @@ from google.appengine.api.users import User
 from google.appengine.ext import webapp
 from mako.lookup import TemplateLookup
 import logging
-#from google.appengine.api import users
-#from mako.template import Template as makotpl
-#import os
-
 
 #def login_required(func):
 #    def wrapper(self, *args, **kw):

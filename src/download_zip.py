@@ -17,7 +17,6 @@ class DownloadZipFile(webapp.RequestHandler):
         logging.info('downloading zip file for email: ' + emailid)
         emailid = str(emailid).strip()
         if emailid and emailid != '':
-            #self.response.headers['Content-Type'] = 'text/plain'
             email = Email.get(emailid)
             if email:
                 logging.info('email attachments count: ' + len(email.attachments))

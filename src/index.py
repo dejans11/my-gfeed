@@ -27,10 +27,7 @@ class IndexPage(TemplateHandler):
         template_values = {
                            'login_url' : users.create_login_url('/')
                            }
-        
-        #path = os.path.join(os.path.dirname(__file__), 'html/index.html')
-        #mako_template = makotpl(filename=path, default_filters=['decode.utf8'])
-        #self.response.out.write(mako_template.render_unicode(**template_values))
+
         self.template_values = template_values
         self.render('index.html')
 

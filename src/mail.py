@@ -17,8 +17,6 @@ import logging
 import os
 import settings
 
-#from util import login_required
-
 class MailPage(TemplateHandler):
 
     @login_required
@@ -29,9 +27,6 @@ class MailPage(TemplateHandler):
         q = RegisteredUserSettings.all()
         q.filter('user', user)
         user_settings_list = q.fetch(1)
-        #query = db.GqlQuery('select * from Email where user = :user', user=user)
-        #query.bind(user=user)
-        #emails = db.Query(Email).filter('user', user)
 
         if user_settings_list == None or len(user_settings_list) == 0:
             # settings not yet created - for old users
@@ -43,9 +38,6 @@ class MailPage(TemplateHandler):
         
         emails = Email.all()
         emails.filter('user', user).order('-received')
-        #query = db.GqlQuery('select * from Email where user = :user', user=user)
-        #query.bind(user=user)
-        #emails = db.Query(Email).filter('user', user)
         
         page = self.request.get("page", default_value="1");
         page = int(page);
@@ -66,17 +58,13 @@ class MailPage(TemplateHandler):
                            'prev_page': prev_page,
                            'user_settings': user_settings
                 }
-        #path = os.path.join(os.path.dirname(__file__), 'html/mail.html')
-        #mako_template = makotpl(filename=path, default_filters=['decode.utf8'])
-        #self.response.out.write(mako_template.render_unicode(**template_values))
-        
+
         self.template_values = template_values
         self.render('mail.html')
 
     def emails_paged(self, emails, page, user_settings):
         ret = {};
         if emails is not None:
-            #emails_paged = PagedQuery(emails, int(user_settings.paging_pager_count))
             emails_paged = PagedQuery(emails, settings.PAGE_SIZE)
             if page > 1:
                 ret["results"] = emails_paged.fetch_page(page);

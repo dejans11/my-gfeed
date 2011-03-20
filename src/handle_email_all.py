@@ -10,8 +10,7 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp.mail_handlers import InboundMailHandler 
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext import db
-from google.appengine.api import memcache
-#from google.appengine.api.memcache import Client 
+from google.appengine.api import memcache 
 from data.model import Email, Files, DBLogging
 import settings
 from utilities.util import check_user_registered_by_email, parse_email
@@ -25,7 +24,6 @@ class EmailHandler(InboundMailHandler):
         
         logging.info("to email trimmed: " + to_email_parsed)
 
-        #is_registered = RegisteredUser.gql('where user=:1', users.get_current_user())
         user = check_user_registered_by_email(to_email_parsed)
 
         html_body = ''
@@ -47,16 +45,6 @@ class EmailHandler(InboundMailHandler):
                 except:
                     logging.info('plain_body bodies.decode() failed for content_type : ' + content_type)
                     logging.info('plain_body bodies.decode() failed for bodies : ' + str(bodies))
-        
-        #DBLogging
-        #plain_body = ''
-        #html_body = ''
-        #if hasattr(mail_message, 'body'):
-            #plain_body = unicode(mail_message.body.decode())
-            #plain_body = mail_message.body
-        #if hasattr(mail_message, 'html'):
-            #html_body = unicode(mail_message.html.decode())
-            #html_body = mail_message.html
 
         from_email_parsed = mail_message.sender
         from_email_parsed = parse_email(from_email_parsed)

@@ -12,8 +12,6 @@ from google.appengine.ext.webapp.util import login_required
 from utilities.util import TemplateHandler
 import logging
 
-#from util import login_required
-
 class MailDetailsPage(TemplateHandler):
 
     @login_required
@@ -34,8 +32,6 @@ class MailDetailsPage(TemplateHandler):
                 if len(email.attachments) > 0:
                     email._files = []
                 for i in range(len(email.attachments)):
-                    #logging.info('email[' + unicode(i+1) + '] : [' + unicode(email.attachments[i]) + ']')
-                    #file_key = db.Key.from_path('Files', email.attachments[i])
                     file = Files.get(email.attachments[i])
                     email._files.append(file)
                     logging.info('file.name : ' + file.name)
@@ -47,9 +43,6 @@ class MailDetailsPage(TemplateHandler):
                            'logout_url': users.create_logout_url("/"),
                            'email': email
                 }
-        #path = os.path.join(os.path.dirname(__file__), 'html/mail.html')
-        #mako_template = makotpl(filename=path, default_filters=['decode.utf8'])
-        #self.response.out.write(mako_template.render_unicode(**template_values))
         
         self.template_values = template_values
         self.render('mail_details.html')
