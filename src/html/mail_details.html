@@ -40,7 +40,7 @@ Hello ${ nickname }...
 				Attachment[${ counter }] : <a href="/download/${ file.key() }">${ file.name }</a>
 				<br />
 		%endfor
-		<a href="javascript:alert('DISABLED');return;/download_zip/${ email.key() }">Download all attachments as zip file...</a>
+		<a href="/download_zip/${ email.key() }">Download all attachments as zip file...</a>
 	% endif
 <br />
 ---------------------

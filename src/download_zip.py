@@ -29,15 +29,29 @@ class DownloadZipFile(webapp.RequestHandler):
                 for attachment in email.attachments:
                     file_attachment = Files.get(attachment)
                     if file_attachment:
-                        zfile = self.addFile(zfile, file_attachment.name.decode('utf-8'), file_attachment.content.decode('utf-8'))
+                        zfile = self.addFile(zfile, file_attachment.name, file_attachment.content)
+                
+                zfile.close()
+                zipstream.seek(0)
                 
                 self.response.headers['Content-Type'] = 'application/zip'
                 self.response.headers['Content-Disposition'] = 'attachment; filename="attachments.zip"'
-                self.response.out.write(zfile.content)
+                #self.response.out.write(zfile.content)
+                while True:
+                    buf = zipstream.read(2048)
+                    if buf == "":
+                        break
+                    self.response.out.write(buf)
             
     def addFile(self, zipstream, fname, content):
         # store the contents in a stream
         f = StringIO(content)
         f.seek(0)
+        
+        logging.info("adding file [" + fname + "] with size f.len : " + str(f.len/1024) + "kb")
+        
         # write the contents to the zip file
-        zipstream.writestr(fname, content)
+        #zipstream.writestr(fname, content)
+        #zipstream.writestr(fname.decode("utf-8"), f.getvalue())
+        zipstream.writestr(fname.encode('ascii'), f.getvalue())
+        return zipstream
