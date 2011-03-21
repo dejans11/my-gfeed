@@ -34,7 +34,9 @@ class MailPage(TemplateHandler):
             user_settings = RegisteredUserSettings(paging_pager_count=settings.PAGE_SIZE, user=user)
             user_settings.put()
         else:
+            logging.info("user settings already exist...")
             user_settings = user_settings_list[0]
+            logging.info("user_settings_list[0] : " + str(user_settings.paging_pager_count))
         
         emails = Email.all()
         emails.filter('user', user).order('-received')
@@ -65,7 +67,7 @@ class MailPage(TemplateHandler):
     def emails_paged(self, emails, page, user_settings):
         ret = {};
         if emails is not None:
-            emails_paged = PagedQuery(emails, settings.PAGE_SIZE)
+            emails_paged = PagedQuery(emails, int(user_settings.paging_pager_count))
             if page > 1:
                 ret["results"] = emails_paged.fetch_page(page);
             else:

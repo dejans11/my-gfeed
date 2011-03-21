@@ -18,11 +18,11 @@ class Email(db.Model):
     '''
     user = db.UserProperty()
     
-    sender = db.StringProperty(required=True)
-    to = db.StringProperty(required=True)
+    sender = db.StringProperty(required=True, multiline=True)
+    to = db.StringProperty(required=True, multiline=True)
     cc = db.TextProperty(required=False)
     bcc = db.TextProperty(required=False)
-    reply_to = db.StringProperty(required=False)
+    reply_to = db.StringProperty(required=False, multiline=True)
     subject = db.StringProperty(required=False, multiline=True)
     body = db.TextProperty(required=False)
     html = db.TextProperty(required=False)

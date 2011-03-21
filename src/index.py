@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from download import DownloadFile
+from download_zip import DownloadZipFile
 from google.appengine.api import users
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app

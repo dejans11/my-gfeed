@@ -17,7 +17,8 @@ from utilities.util import check_user_registered_by_email, parse_email
 
 class EmailHandler(InboundMailHandler):
     def receive(self, mail_message):
-        logging.info("Received a message from: " + str(mail_message.sender) + " ; message to : " + str(mail_message.to))
+        #logging.info("Received a message from: " + str(mail_message.sender) + " ; message to : " + str(mail_message.to))
+        logging.info("Received a message from: " + str(mail_message.sender))
 
         to_email_parsed = str(mail_message.to)
         to_email_parsed = parse_email(to_email_parsed)

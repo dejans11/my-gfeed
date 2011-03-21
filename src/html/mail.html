@@ -27,7 +27,7 @@ Hello ${ nickname }...
 		% if email.attachments:
 			Attachments :  ${ str(len(email.attachments)) }
 			<br />
-			<a href="/download_zip/${ email.key() }">Download all attachments as zip file...</a>
+			<a href="javascript:alert('DISABLED');return;/download_zip/${ email.key() }">Download all attachments as zip file...</a>
 			<br />
 		% endif
 		<a href="/maildetails/${ email.key() }">More...</a>

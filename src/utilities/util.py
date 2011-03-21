@@ -61,9 +61,9 @@ def check_user_registered_by_email(email):
         return registered
 
 def parse_email(email):
-    if '<'  in email>= 0:
-        email = email[email.index("<") + 1:]
-        email = email[:email.index(">")]
+    if email.find("<") > -1:
+        email = email[email.find("<") + 1:]
+        email = email[:email.find(">")]
     return email
 
 class TemplateHandler(webapp.RequestHandler): 
