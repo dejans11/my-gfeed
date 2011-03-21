@@ -1,0 +1,1 @@
+python2.5 "../../../google_appengine/appcfg.py" update "../src"
