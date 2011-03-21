@@ -1,19 +1,18 @@
-- TO TEST
-
-	- create possibility to download all attachments at once in zip format - DONE, NOT TESTED
-
 - PRIORITY
 
-	- check about putting unicode text attachment to BlobProperty (binary encoding, checking content, etc.)
+	- check about putting text attachment to BlobProperty (binary encoding, checking content, etc.)
 
 - OTHER
 
+	- create default layout for the pages (header, footer, menu, lists, links, page content, etc.)
+
+DONE
+	
+	- create default user layout (example: number of pages in paging) - DONE
+	- create user specific layout possibilities that extends default user layout (example: number of pages in paging) - DONE
+	- create possibility to download all attachments at once in zip format - DONE
 	- manage list of emails - paging - DONE
 	- add attachments in Email entity - DONE
 	- check attachments in received email and add it to Email entity - DONE 
 	- create possibility to download attachments in correct format - DONE
 	- displaying count of attachments for each email in the list of emails - DONE
-	- create default layout for the pages (header, footer, menu, lists, links, page content, etc.)
-	- create default user layout (example: number of pages in paging) - DONE
-	- create user specific layout possibilities that extends default user layout (example: number of pages in paging) - DONE
-	- 
