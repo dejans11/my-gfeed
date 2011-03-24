@@ -8,11 +8,29 @@
 
 <%def name="head_tags()">
   <!-- add some head tags here -->
+  	<script type="text/javascript">
+		function select_all()
+		{
+			var checkboxe_all = document.getElementById("delete_mail_select_all");
+			var checkboxes = document.getElementsByName("delete_mail_ids");
+			for(var i=0;i<checkboxes.length;i++)
+			{
+				checkboxes[i].checked = checkboxe_all.checked;
+			}
+		}
+	</script>
 </%def>
 
 Hello ${ nickname }...
 
 <br />
+<br />
+
+
+<form action="/mail"  id="form_settings" name="form_mail" method="get">
+
+Select all: <input type="checkbox" id="delete_mail_select_all" name="delete_mail_select_all" value="all" onclick="javascript:select_all();" />
+
 <br />
 --------------------------------------------<br />
 
@@ -32,6 +50,8 @@ Hello ${ nickname }...
 		% endif
 		<a href="/maildetails/${ email.key() }">More...</a>
 		<br />
+		<input type="checkbox" id="delete_mail_ids" name="delete_mail_ids" value="${ email.key() }" />
+		<br />
 		
 		--------------------------------------------<br />
 	% endfor
@@ -49,6 +69,13 @@ Hello ${ nickname }...
 	No new emails...
 % endif
 
+<br />
+
+	<input type="submit" id="btn_delete" name="btn_delete" value="Delete" />
+
+</form>
+
+<br />
 <br />
 
 <a href="${ home_url }">Homepage</a>

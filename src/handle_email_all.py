@@ -30,22 +30,37 @@ class EmailHandler(InboundMailHandler):
         html_body = ''
         plain_body = ''
         
-        html_bodies = mail_message.bodies('text/html')
-        for content_type, bodies in html_bodies:
-            try:
-                html_body += unicode(bodies.decode())
-            except:
-                logging.info('html_body bodies.decode() failed for content_type : ' + content_type)
-                logging.info('html_body bodies.decode() failed for bodies : ' + str(bodies))
+#        html_bodies = mail_message.bodies('text/html')
+#        for content_type, bodies in html_bodies:
+#            try:
+#                html_body += unicode(bodies.decode())
+#            except:
+#                logging.info('html_body bodies.decode() failed for content_type : ' + content_type)
+#                logging.info('html_body bodies.decode() failed for bodies : ' + str(bodies))
+#        
+#        if len(html_body) == 0:
+#            plaintext_bodies = mail_message.bodies('text/plain')
+#            for content_type, bodies in plaintext_bodies:
+#                try:
+#                    plain_body += unicode(bodies.decode())
+#                except:
+#                    logging.info('plain_body bodies.decode() failed for content_type : ' + content_type)
+#                    logging.info('plain_body bodies.decode() failed for bodies : ' + str(bodies))
+
+        bodies = mail_message.bodies()
+        for content_type, body in bodies:
+            if body.encoding == '8bit':
+                body.encoding = '7bit'
         
-        if len(html_body) == 0:
-            plaintext_bodies = mail_message.bodies('text/plain')
-            for content_type, bodies in plaintext_bodies:
-                try:
-                    plain_body += unicode(bodies.decode())
-                except:
-                    logging.info('plain_body bodies.decode() failed for content_type : ' + content_type)
-                    logging.info('plain_body bodies.decode() failed for bodies : ' + str(bodies))
+            #test for html content
+            if content_type == "text/html":
+                #parse html result
+                html_body += body.decode()
+                logging.info('body text/html')
+            
+            if content_type == "text/plain":
+                plain_body += body.decode()
+                logging.info('body text/plain')
 
         from_email_parsed = mail_message.sender
         from_email_parsed = parse_email(from_email_parsed)

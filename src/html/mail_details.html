@@ -23,10 +23,12 @@ Hello ${ nickname }...
 	<br />
 	Date and time :  ${ email.received }
 	<br />
-	Plain body :
+	% if not email.html:
+		Plain body :
+			<br />
+			${ email.body }
 		<br />
-		${ email.body }
-	<br />
+	% endif
 	Html body :
 		<br />
 		${ email.html }

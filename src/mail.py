@@ -24,6 +24,9 @@ class MailPage(TemplateHandler):
         logging.info('MailPage processing')
         user = users.get_current_user()
         
+        page = self.request.get("page", default_value="1");
+        page = int(page);
+        
         q = RegisteredUserSettings.all()
         q.filter('user', user)
         user_settings_list = q.fetch(1)
@@ -38,11 +41,31 @@ class MailPage(TemplateHandler):
             user_settings = user_settings_list[0]
             logging.info("user_settings_list[0] : " + str(user_settings.paging_pager_count))
         
+        btn_delete = self.request.get("btn_delete", None)
+        
+        if btn_delete != None:
+            logging.info("deleting emails...")
+            
+            delete_mail_ids = self.request.get("delete_mail_ids", allow_multiple=True, default_value=None)
+            deleted_count = 0
+            keys_to_delete = []
+            if delete_mail_ids:
+                #change this to use a list of keys and delete list and not one key at a time
+                for delete_mail_id in delete_mail_ids:
+                    logging.info("deleting email : " + str(delete_mail_id))
+                    keys_to_delete.append(delete_mail_id)
+                    #Email.delete(delete_mail_id)
+                    deleted_count += 1
+
+                db.delete(keys_to_delete)
+                logging.info("deleted_count : " + str(deleted_count))
+            
+            if page > 1 and deleted_count == int(user_settings.paging_pager_count):
+                page -= 1
+        
         emails = Email.all()
         emails.filter('user', user).order('-received')
-        
-        page = self.request.get("page", default_value="1");
-        page = int(page);
+
         emails_paged = self.emails_paged(emails, page, user_settings)
         
         emails = emails_paged["results"];
