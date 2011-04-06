@@ -107,7 +107,12 @@ class EmailHandler(InboundMailHandler):
                     params['attachments'] = attachments
             
             new_email = Email(**params)
-            new_email.put()
+            
+            try:
+                new_email.put()
+            except:
+                logging.info('html_body: ' + html_body)
+                logging.info('plain_body: ' + plain_body)
         
     def check_if_confirmation_mail(self, html_body, plain_body):
         email = None
