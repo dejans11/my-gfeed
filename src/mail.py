@@ -53,6 +53,14 @@ class MailPage(TemplateHandler):
                 #change this to use a list of keys and delete list and not one key at a time
                 for delete_mail_id in delete_mail_ids:
                     logging.info("deleting email : " + str(delete_mail_id))
+                    
+                    logging.info("deleting email attachments")
+                    current_email = Email.get(delete_mail_id)
+                    attachment_keys = []
+                    for attachment_key in current_email.attachments:
+                        attachment_keys.append(attachment_key)
+                    db.delete(attachment_keys)
+                    
                     keys_to_delete.append(delete_mail_id)
                     #Email.delete(delete_mail_id)
                     deleted_count += 1
