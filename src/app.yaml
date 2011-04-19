@@ -8,11 +8,11 @@ inbound_services:
 
 handlers:
 - url: /_ah/mail/.+ 
-  script: handle_email_all.py 
-
-- url: /.*
-  script: index.py
+  script: handle_email_all.py
   
 - url: /favicon\.ico
   static_files: html/images/favicon.ico
   upload: html/images/favicon\.ico
+
+- url: /.*
+  script: index.py

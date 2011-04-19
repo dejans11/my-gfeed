@@ -36,9 +36,9 @@ Select all: <input type="checkbox" id="delete_mail_select_all" name="delete_mail
 
 % if emails :
 	% for email in emails:
-		Sender : ${ unicode(email.sender) } 
+		Sender : ${ email.sender } 
 		<br />
-		Subject :  ${ unicode(email.subject) }
+		Subject :  ${ email.subject }
 		<br />
 		Date and time :  ${ email.received }
 		<br />
@@ -69,6 +69,13 @@ Select all: <input type="checkbox" id="delete_mail_select_all" name="delete_mail
 	No new emails...
 % endif
 
+<br />
+--------------------------------------------
+<br />
+
+Select all: <input type="checkbox" id="delete_mail_select_all" name="delete_mail_select_all" value="all" onclick="javascript:select_all();" />
+
+<br />
 <br />
 
 	<input type="submit" id="btn_delete" name="btn_delete" value="Delete" />
