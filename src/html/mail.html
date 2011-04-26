@@ -1,17 +1,14 @@
-## -*- coding: utf-8 -*-
-
-<%inherit file="base.html" />
-
+## -*- coding: utf-8 -*- 
+<%inherit file="base.html" /> 
 <%def name="title()">
-	<title>GmailFeed - Mail</title>
-</%def>
-
+<title>GmailFeed - Mail</title>
+</%def> 
 <%def name="head_tags()">
-  <!-- add some head tags here -->
-  	<script type="text/javascript">
-		function select_all()
+<!-- add some head tags here -->
+<script type="text/javascript">
+		function select_all(id)
 		{
-			var checkboxe_all = document.getElementById("delete_mail_select_all");
+			var checkboxe_all = document.getElementById(id);
 			var checkboxes = document.getElementsByName("delete_mail_ids");
 			for(var i=0;i<checkboxes.length;i++)
 			{
@@ -19,7 +16,7 @@
 			}
 		}
 	</script>
-</%def>
+</%def> 
 
 Hello ${ nickname }...
 
@@ -27,58 +24,50 @@ Hello ${ nickname }...
 <br />
 
 
-<form action="/mail"  id="form_settings" name="form_mail" method="get">
+<form action="/mail" id="form_settings" name="form_mail" method="get">
 
-Select all: <input type="checkbox" id="delete_mail_select_all" name="delete_mail_select_all" value="all" onclick="javascript:select_all();" />
-
-<br />
---------------------------------------------<br />
-
-% if emails :
-	% for email in emails:
-		Sender : ${ email.sender } 
-		<br />
-		Subject :  ${ email.subject }
-		<br />
-		Date and time :  ${ email.received }
-		<br />
-		% if email.attachments:
-			Attachments :  ${ str(len(email.attachments)) }
-			<br />
-			<a href="/download_zip/${ email.key() }">Download all attachments as zip file...</a>
-			<br />
-		% endif
-		<a href="/maildetails/${ email.key() }">More...</a>
-		<br />
-		<input type="checkbox" id="delete_mail_ids" name="delete_mail_ids" value="${ email.key() }" />
-		<br />
-		
-		--------------------------------------------<br />
-	% endfor
-	% if not prev_page:
-		Previous Page   
-	% else:
-		<a href="/mail?page=${ prev_page }">Previous Page</a>
-	% endif
-	% if not next_page:   
-		Next Page
-	% else:
-		<a href="/mail?page=${ next_page }">Next Page</a>   
-	% endif
-% else:
-	No new emails...
-% endif
-
-<br />
 --------------------------------------------
 <br />
 
-Select all: <input type="checkbox" id="delete_mail_select_all" name="delete_mail_select_all" value="all" onclick="javascript:select_all();" />
+% if emails : 
+	% for email in emails: 
+	Sender : ${ email.sender } <br />
+	Subject : ${ email.subject } <br />
+	Date and time : ${ email.received } <br />
+	% if email.attachments: 
+		Attachments : ${ str(len(email.attachments)) } <br />
+		<a href="/download_zip/${ email.key() }">Download all attachments as zip file...</a> <br />
+	% endif <a href="/maildetails/${ email.key() }">More...</a> <br />
+<input type="checkbox" id="delete_mail_ids" name="delete_mail_ids"
+	value="${ email.key() }" /> <br />
 
+--------------------------------------------
 <br />
+% endfor 
+% if not prev_page: 
+	Previous Page 
+	% else: 
+	<a href="/mail?page=${ prev_page }">Previous Page</a> 
+% endif 
+% if not next_page: 
+Next Page 
+% else: 
+
+<a href="/mail?page=${ next_page }">Next Page</a> 
+% endif 
+% else: 
+No new emails... 
+% endif 
+<br />
+-------------------------------------------- 
 <br />
 
-	<input type="submit" id="btn_delete" name="btn_delete" value="Delete" />
+Select all: <input type="checkbox" id="delete_mail_select_all_down"
+	name="delete_mail_select_all_down" value="all"
+	onclick="javascript:select_all('delete_mail_select_all_down');" /> <br />
+<br />
+
+<input type="submit" id="btn_delete" name="btn_delete" value="Delete" />
 
 </form>
 

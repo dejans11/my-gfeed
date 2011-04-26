@@ -1,55 +1,47 @@
-## -*- coding: utf-8 -*-
-
-<%inherit file="base.html" />
-
+## -*- coding: utf-8 -*- 
+<%inherit file="base.html" /> 
 <%def name="title()">
-	<title>GmailFeed - Mail Details</title>
-</%def>
-
+<title>GmailFeed - Mail Details</title>
+</%def> 
 <%def name="head_tags()">
-  <!-- add some head tags here -->
-</%def>
+<!-- add some head tags here -->
+</%def> 
 
 Hello ${ nickname }...
 
 <br />
 <br />
---------------------------------------------<br />
+--------------------------------------------
+<br />
 
-% if email :
-	Sender : ${ email.sender } 
-	<br />
-	Subject :  ${ email.subject }
-	<br />
-	Date and time :  ${ email.received }
-	<br />
-	% if not email.html:
-		Plain body :
-			<br />
-			${ email.body }
-		<br />
-	% endif
-	Html body :
-		<br />
-		${ email.html }
-	<br />
-	Attachments:
-	<br />
-	% if email._files:
-		<% counter = 0 %>
-		% for file in email._files:
-				<% counter += 1 %>
-				Attachment[${ counter }] : <a href="/download/${ file.key() }">${ file.name }</a>
-				<br />
-		%endfor
-		<a href="/download_zip/${ email.key() }">Download all attachments as zip file...</a>
-	% endif
+% if email : Sender : ${ email.sender }
+<br />
+Subject : ${ email.subject }
+<br />
+Date and time : ${ email.received }
+<br />
+% if not email.html: Plain body :
+<br />
+${ email.body }
+<br />
+% endif Html body :
+<br />
+${ email.html }
+<br />
+Attachments:
+<br />
+% if email._files: <% counter = 0 %> % for file in email._files: <%
+counter += 1 %> Attachment[${ counter }] :
+<a href="/download/${ file.key() }">${ file.name }</a>
+<br />
+%endfor
+<a href="/download_zip/${ email.key() }">Download all attachments as
+zip file...</a>
+% endif
 <br />
 ---------------------
 <br />
-% else:
-	Invalid email page...
-% endif
+% else: Invalid email page... % endif
 
 <br />
 

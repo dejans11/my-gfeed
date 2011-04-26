@@ -1,4 +1,4 @@
-#Thu Mar 24 19:45:18 EET 2011
+#Tue Apr 26 18:51:00 EEST 2011
 eclipse.preferences.version=1
 encoding//src/data/model.py=utf-8
 encoding//src/download.py=utf-8
@@ -10,5 +10,6 @@ encoding//src/mail.py=utf-8
 encoding//src/mail_details.py=utf-8
 encoding//src/mako/_ast_util.py=utf-8
 encoding//src/settings.py=utf-8
+encoding//src/tasks.py=utf-8
 encoding//src/user_settings.py=utf-8
 encoding//src/utilities/util.py=utf-8

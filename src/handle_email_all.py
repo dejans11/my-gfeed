@@ -10,14 +10,15 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp.mail_handlers import InboundMailHandler 
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext import db
-from google.appengine.api import memcache 
-from data.model import Email, Files, DBLogging
+from google.appengine.api import memcache
+from data.model import Email, Files
 import settings
 from utilities.util import check_user_registered_by_email, parse_email
+import datetime
+from google.appengine.api import taskqueue
 
 class EmailHandler(InboundMailHandler):
     def receive(self, mail_message):
-        #logging.info("Received a message from: " + str(mail_message.sender) + " ; message to : " + str(mail_message.to))
         logging.info("Received a message from: " + str(mail_message.sender))
 
         to_email_parsed = str(mail_message.to)
@@ -29,23 +30,6 @@ class EmailHandler(InboundMailHandler):
 
         html_body = ''
         plain_body = ''
-        
-#        html_bodies = mail_message.bodies('text/html')
-#        for content_type, bodies in html_bodies:
-#            try:
-#                html_body += unicode(bodies.decode())
-#            except:
-#                logging.info('html_body bodies.decode() failed for content_type : ' + content_type)
-#                logging.info('html_body bodies.decode() failed for bodies : ' + str(bodies))
-#        
-#        if len(html_body) == 0:
-#            plaintext_bodies = mail_message.bodies('text/plain')
-#            for content_type, bodies in plaintext_bodies:
-#                try:
-#                    plain_body += unicode(bodies.decode())
-#                except:
-#                    logging.info('plain_body bodies.decode() failed for content_type : ' + content_type)
-#                    logging.info('plain_body bodies.decode() failed for bodies : ' + str(bodies))
 
         bodies = mail_message.bodies()
         for content_type, body in bodies:
@@ -92,27 +76,34 @@ class EmailHandler(InboundMailHandler):
             
             params['user'] = user
             
+            attachments = []
             if hasattr(mail_message, 'attachments'):
-                attachments = []
                 for (name, content) in mail_message.attachments:
                     logging.info('new attachment name : ' + name)
                     try:
                         new_file = Files(name=name, content=db.Blob(content.decode()))
-                        new_file.put()
-                        attachments.append(new_file.key())
+                        attachments.append(new_file)
+                        #new_file.put()
+                        #attachments.append(new_file.key())
                     except:
                         logging.info('decoding content failed')                        
-                if len(attachments) <> 0:
-                    #attachments = None
-                    params['attachments'] = attachments
+                #if len(attachments) <> 0:
+                    #params['attachments'] = attachments
             
             new_email = Email(**params)
             
-            try:
-                new_email.put()
-            except:
-                logging.info('html_body: ' + html_body)
-                logging.info('plain_body: ' + plain_body)
+            #try:
+                #new_email.put()
+            #except:
+                #logging.info('html_body: ' + html_body)
+                #logging.info('plain_body: ' + plain_body)
+                
+            mem_key = datetime.datetime.now()
+            mem_key = str(mem_key.year) + str(mem_key.month) + str(mem_key.day) + str(mem_key.hour) + str(mem_key.minute) + str(mem_key.second) + str(mem_key.microsecond)
+            memcache.add(key=mem_key, value={ 'email' : new_email, 'files' : attachments})
+            taskqueue.add(url='/task_put_email', params={'mem_key': mem_key})
+            
+            logging.info('new email mem_key : ' + str(mem_key))
         
     def check_if_confirmation_mail(self, html_body, plain_body):
         email = None

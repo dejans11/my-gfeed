@@ -99,6 +99,7 @@ class MailPage(TemplateHandler):
         ret = {};
         if emails is not None:
             emails_paged = PagedQuery(emails, int(user_settings.paging_pager_count))
+            #emails_paged = PagedQuery(emails, 3)
             if page > 1:
                 ret["results"] = emails_paged.fetch_page(page);
             else:

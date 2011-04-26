@@ -9,6 +9,7 @@ from home import HomePage
 from mail import MailPage
 from mail_details import MailDetailsPage
 from mako.template import Template as makotpl
+from tasks import TaskEmailPut
 from user_settings import UserSettingsPage
 from utilities.util import TemplateHandler
 import logging
@@ -40,6 +41,7 @@ application = webapp.WSGIApplication(
                                       (r'/maildetails/(.*)', MailDetailsPage),
                                       ('/settings', UserSettingsPage),
                                       (r'/download_zip/(.*)', DownloadZipFile),
+                                      ('/task_put_email', TaskEmailPut),
                                       ],
                                      debug=settings.DEBUG)
 

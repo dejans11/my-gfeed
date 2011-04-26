@@ -1,14 +1,11 @@
-## -*- coding: utf-8 -*-
-
-<%inherit file="base.html" />
-
+## -*- coding: utf-8 -*- 
+<%inherit file="base.html" /> 
 <%def name="title()">
-	<title>GmailFeed - Home</title>
-</%def>
-
+<title>GmailFeed - Home</title>
+</%def> 
 <%def name="head_tags()">
-  <!-- add some head tags here -->
-</%def>
+<!-- add some head tags here -->
+</%def> 
 
 Hello ${ nickname }...
 
@@ -16,7 +13,8 @@ Hello ${ nickname }...
 
 % if confirmation_code:
 <br />
-Your confirmation code to use in your gmail account is [${ confirmation_code }]...
+Your confirmation code to use in your gmail account is [${
+confirmation_code }]...
 <br />
 <br />
 % endif

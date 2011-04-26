@@ -4,4 +4,17 @@
 <pydev_project>
 <pydev_property name="org.python.pydev.PYTHON_PROJECT_INTERPRETER">Default</pydev_property>
 <pydev_property name="org.python.pydev.PYTHON_PROJECT_VERSION">python 2.7</pydev_property>
+<pydev_pathproperty name="org.python.pydev.PROJECT_SOURCE_PATH">
+<path>/my-gfeed/src</path>
+</pydev_pathproperty>
+<pydev_pathproperty name="org.python.pydev.PROJECT_EXTERNAL_SOURCE_PATH">
+<path>${GOOGLE_APP_ENGINE}</path>
+<path>${GOOGLE_APP_ENGINE}/lib/django</path>
+<path>${GOOGLE_APP_ENGINE}/lib/yaml/lib</path>
+<path>${GOOGLE_APP_ENGINE}/lib/webob</path>
+</pydev_pathproperty>
+<pydev_variables_property name="org.python.pydev.PROJECT_VARIABLE_SUBSTITUTION">
+<key>GOOGLE_APP_ENGINE</key>
+<value>C:\Program Files\Google\google_appengine</value>
+</pydev_variables_property>
 </pydev_project>
