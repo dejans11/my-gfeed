@@ -57,7 +57,6 @@ class UserSettingsPage(TemplateHandler):
                            'home_url' : '/home',
                            'nickname' : user.nickname(),
                            'logout_url' : users.create_logout_url("/"),
-                           
                            'msg_updated' : msg_updated,
                            'user_settings' : user_settings
                 }

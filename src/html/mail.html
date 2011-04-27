@@ -37,7 +37,8 @@ Hello ${ nickname }...
 	% if email.attachments: 
 		Attachments : ${ str(len(email.attachments)) } <br />
 		<a href="/download_zip/${ email.key() }">Download all attachments as zip file...</a> <br />
-	% endif <a href="/maildetails/${ email.key() }">More...</a> <br />
+	% endif 
+	<a href="/maildetails/${ email.key() }">More...</a> <br />
 <input type="checkbox" id="delete_mail_ids" name="delete_mail_ids"
 	value="${ email.key() }" /> <br />
 

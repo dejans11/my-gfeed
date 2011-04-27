@@ -14,25 +14,30 @@ Hello ${ nickname }...
 --------------------------------------------
 <br />
 
-% if email : Sender : ${ email.sender }
+% if email : 
+Sender : ${ email.sender }
 <br />
 Subject : ${ email.subject }
 <br />
 Date and time : ${ email.received }
 <br />
-% if not email.html: Plain body :
+% if not email.html: 
+Plain body :
 <br />
 ${ email.body }
 <br />
-% endif Html body :
+% endif 
+Html body :
 <br />
 ${ email.html }
 <br />
 Attachments:
 <br />
-% if email._files: <% counter = 0 %> % for file in email._files: <%
-counter += 1 %> Attachment[${ counter }] :
-<a href="/download/${ file.key() }">${ file.name }</a>
+% if email._files: 
+<% counter = 0 %> 
+% for file in email._files: 
+<% counter += 1 %> 
+Attachment[${ counter }] : <a href="/download/${ file.key() }">${ file.name }</a>
 <br />
 %endfor
 <a href="/download_zip/${ email.key() }">Download all attachments as
@@ -41,7 +46,9 @@ zip file...</a>
 <br />
 ---------------------
 <br />
-% else: Invalid email page... % endif
+% else: 
+Invalid email page... 
+% endif
 
 <br />
 
